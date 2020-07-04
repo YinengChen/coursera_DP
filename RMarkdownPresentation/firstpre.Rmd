@@ -1,0 +1,101 @@
+---
+title: "Yineng's Presentation"
+author: "Yineng Chen"
+date: "7/4/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+
+### Myself
+
+- Name: Yineng Chen
+
+- Age: 24
+
+#### My hobbies
+
+1. Movies
+2. Food
+
+### My School
+
+- columbia
+
+***
+A Slide without title
+
+### **Format**
+
+*qwer*
+
+**Bound**
+
+`summary(cars)`
+
+summary(cars)
+
+## Options for R code 
+
+### Run the code but does not show it : echo = FALSE
+
+The default is echo = FALSE. Delet it to show codes without run the codes.
+
+```{r, eval=FALSE}
+summary(cars$speed)
+```
+
+
+### Show the code and run it: echo=TRUE
+
+```{r, echo=TRUE}
+summary(cars$speed)
+```
+
+## Options for R code 
+
+### Get rid of #s in the output:  comment=""
+
+```{r, echo=TRUE, comment=""}
+summary(cars$speed)
+```
+
+
+### Show the code but do not run it:eval= FALSE
+
+```{r, eval= FALSE}
+head(airquality)
+```
+
+
+
+
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
