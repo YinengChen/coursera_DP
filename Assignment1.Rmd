@@ -44,7 +44,7 @@ manh_airbnb = read_csv("./listings.csv", col_types = c("ccccccddfdddDddd")) %>% 
 - last_review: date of last review
 - reviews per month: average number of reviews per month
 - calculated_host_listings_count: total number of listings for this host
-- availability_365: number of days listing is available out of 365
+- availability_365: number of days listing is available out of 365.
 
 
 ## Map
