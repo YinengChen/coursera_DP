@@ -1,0 +1,96 @@
+---
+title: "Assignment1"
+author: "Yineng Chen"
+date: "7/5/2020"
+output: 
+  html_document:
+    keep_md: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(leaflet)
+library(tidyverse)
+```
+
+## Description
+
+I'm going to focus on the Airbnb data in Manhattan for this Assignment.These data were accessed from [Inside Airbnb](http://insideairbnb.com/get-the-data.html) on July 5th, 2020. The version of the data that we will use in this class can be found [here](http://data.insideairbnb.com/united-states/ny/new-york-city/2020-06-08/visualisations/listings.csv).
+
+## Data discription
+
+The data set contains NYC airbnb data including type of room, price, location, avaiability etc. 
+
+After loading the data, the resulting R data file `airbnb` contains a single dataframe with 21,963 rows of data on 16 variables:
+
+```{r, include=FALSE}
+manh_airbnb = read_csv("./listings.csv", col_types = c("ccccccddfdddDddd")) %>% filter(neighbourhood_group == "Manhattan")
+```
+
+- id: listing id
+- name: listing name
+- host_id: host id
+- host_name: host name
+- neighbourhood_group: NYC borough
+- neighbourhood: NYC neighborhood
+- latitude: listing latitude
+- longitude: listing longitude
+- room_type: type of listing (Entire home/apt, Private room, Shared room)
+- price: listing price
+- minimum_nights: required minimum nights stay
+- number_of_reviews: total number of reviews
+- last_review: date of last review
+- reviews per month: average number of reviews per month
+- calculated_host_listings_count: total number of listings for this host
+- availability_365: number of days listing is available out of 365
+
+
+## Map
+
+The map shows the name, location, Price and room type of Airbnb houses in Manhattan.
+
+```{r}
+popupmessage = paste("Name:", as.character(manh_airbnb$name), "<br>",
+                     "Room Type:", as.character(manh_airbnb$room_type), "<br>",
+                     "Price:", as.character(manh_airbnb$price), "<br>")
+
+
+manh_airbnb = manh_airbnb %>% mutate(color = "pink")
+
+
+getColor <- function(manh_airbnb) {
+  sapply(manh_airbnb$room_type, function(room_type) {
+  if(room_type  == "Private room") {
+    "red"
+  } else if(room_type  == "Entire home/apt") {
+    "lightgreen"
+  } else if(room_type  == "Shared room") {
+    "lightblue"
+  }else {
+    "pink"
+  } })
+}
+
+icons <- awesomeIcons(
+  icon = 'ios-close',
+  iconColor = 'white',
+  library = 'ion',
+  markerColor = getColor(manh_airbnb)
+)
+
+
+
+manh_airbnb %>% 
+  leaflet() %>%
+  setView(lng = -73.9712, lat = 40.7831, zoom = 12) %>% 
+  addTiles() %>%
+  addAwesomeMarkers(clusterOptions = markerClusterOptions(),
+             popup = popupmessage,icon=icons) %>% 
+  addLegend(labels = c("Private room","Entire home/apt","Shared room","Hotel room"), colors = c("red", "lightgreen", "lightblue","pink"))
+  
+```
+
+
+
