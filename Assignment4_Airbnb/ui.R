@@ -15,14 +15,14 @@ shinyUI(fluidPage(
     titlePanel("Search for an Airbnb house in Manhattan"),
     sidebarLayout(
         sidebarPanel(
-            h2("Desired Program Characteristics!"),
-            fluidRow(column(3,
+            h2("Desired Airbnb Characteristics!"),
+            fluidRow(column(5,
                              checkboxGroupInput(inputId = "rate",
                                                label = "Choose a rate",
                                                choices = c("1","2","3","4","5"),
                                                selected = "3")
                             ),
-                     column(7, offset = 2,
+                     column(5, offset = 2,
                             checkboxGroupInput(inputId = "type",
                                                label = "Choose rome type",
                                                choices = c("Entire home/apt","Private room","Hotel room","Shared room"),
